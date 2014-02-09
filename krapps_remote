@@ -1,0 +1,42 @@
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides: krapps_remote 
+# Required-Start: $remote_fs $syslog
+# Required-Stop: $remote_fs $syslog
+# Default-Start: 2 3 4 5
+# Default-Stop: 0 1 6
+# Short-Description: Load krapps_remote.pd patch
+# Description: 
+### END INIT INFO
+
+PATH=/usr/local/bin:/etc/alternatives:$PATH
+
+ARGS="-noaudio -mididev 1,2,3,4,5,6,7,8,9 -open /home/pi/pd/krapps_remote.pd" 
+ 
+# Le switch case ci-dessous permet de savoir si le système souhaite lancer ou arrêter le script (on le lance au démarrage et l'arrête à la fermeture du système)
+case "$1" in
+    start)
+	$0 stop
+	case "$2" in
+	    gui)
+		echo "Start patch with GUI"
+	    ;;
+
+    	    *)
+	        ARGS="-nogui $ARGS"
+	    ;;
+	esac
+	su - pi -c "pd $ARGS" &
+    ;;
+
+    stop)
+	echo "quit;" | pdsend 3000
+    ;;
+
+    *)
+        echo "Usage: '$0' {start|stop}"
+        exit 1
+    ;;
+esac
+
+exit 0
