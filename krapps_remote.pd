@@ -1,4 +1,4 @@
-#N canvas 561 186 952 631 10;
+#N canvas 604 146 952 631 10;
 #X declare -path bin;
 #X obj 178 77 ctlin;
 #X obj 165 549 ctlout;
@@ -214,7 +214,7 @@ depuis la ligne de commande :;
 #X connect 5 1 8 0;
 #X connect 8 0 9 0;
 #X restore 799 370 pd quit;
-#N canvas 433 130 1054 914 midi-connection 0;
+#N canvas 425 141 1054 914 midi-connection 0;
 #X obj 70 10 aconnect/aconnect;
 #N canvas 1 90 450 300 disconnect_all 0;
 #X msg 140 203;
@@ -354,7 +354,9 @@ depuis la ligne de commande :;
 #X text 437 -89 ce patch connect toutes les sources disponibles à
 PureData et connect PureData à toutes les destinations disponibles
 ;
+#X obj 308 51 print;
 #X connect 0 0 3 0;
+#X connect 0 0 111 0;
 #X connect 2 0 0 0;
 #X connect 3 0 9 0;
 #X connect 3 1 26 0;
@@ -483,6 +485,8 @@ PureData et connect PureData à toutes les destinations disponibles
 #X connect 109 0 85 0;
 #X restore 316 306 pd midi-connection;
 #X obj 293 60 declare -path bin;
+#X obj 296 307 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
 #X connect 0 0 4 0;
 #X connect 0 1 4 1;
 #X connect 0 2 4 2;
@@ -504,3 +508,4 @@ PureData et connect PureData à toutes les destinations disponibles
 #X connect 23 1 17 0;
 #X connect 24 0 22 0;
 #X connect 28 0 10 0;
+#X connect 30 0 28 0;
